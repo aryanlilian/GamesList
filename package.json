@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/aryanlilian/GamesList/issues"
   },
-  "homepage": "https://github.com/aryanlilian/GamesList#readme"
+  "homepage": "https://github.com/aryanlilian/GamesList#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
