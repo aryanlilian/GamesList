@@ -1,0 +1,19 @@
+{
+  "name": "gameslist",
+  "version": "1.0.0",
+  "description": "Simple NodeJS & ExpressJS CRUD Web App",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aryanlilian/GamesList.git"
+  },
+  "author": "A R Y A N",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aryanlilian/GamesList/issues"
+  },
+  "homepage": "https://github.com/aryanlilian/GamesList#readme"
+}
