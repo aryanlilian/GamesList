@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <body>
+      <%- include('./partials/navbar.ejs') %>
+      <div class="text-center mt-5">
+          <h3 class="mb-5">Add a new Game!</h3>
+          <div class="container">
+              <form class="form-control" action="/games/new" method="POST">
+                  <div class="input-group mb-3">
+                    <input type="text" name="title" class="form-control" placeholder="Enter title here">
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <input type="text" name="description" class="form-control" placeholder="Enter description here">
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <select name="category" class="form-select">
+                      <option value="Arcade">Arcade</option>
+                      <option value="Aventure">Aventure</option>
+                      <option value="Action">Action</option>
+                      <option value="Sport">Sport</option>
+                      <option value="Multiplayer">Multiplayer</option>
+                    </select>
+                  </div>
+                  <div class="d-grid gap-2">
+                      <button class="btn btn-primary" type="submit">Add game</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+      <%- include('./partials/footer.ejs') %>
+  </body>
+</html>

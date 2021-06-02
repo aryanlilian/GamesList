@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const indexRoutes = require('./routes/index');
+const gamesRoutes = require('./routes/games');
 
 // express app
 const app = express();
@@ -19,8 +20,10 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
 app.set('view engine', 'ejs');
 
 // middlewares & routes
+app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use('/', indexRoutes);
+app.use('/games', gamesRoutes);
 app.use((req, res) => {
     const context = {
         title: '404'
