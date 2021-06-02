@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <body>
+      <%- include('./partials/navbar.ejs') %>
+      <div class="text-center mt-5">
+          <h1>Games List</h1>
+          <div class="container">
+              <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Title</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Category</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <% if (games.length > 0) { %>
+                          <% games.forEach((game) => { %>
+                              <tr>
+                                  <th><%= game.title %></th>
+                                  <th><%= game.description %></th>
+                                  <th><%= game.category %></th>
+                              </tr>
+                          <% }); %>
+                      <% } else { %>
+                          <p class="text-center">For the moment there are no games!</p>
+                      <% } %>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+      <%- include('./partials/footer.ejs') %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+  </body>
+</html>
