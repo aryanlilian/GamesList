@@ -1,15 +1,18 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 const indexRoutes = require('./routes/index');
 const gamesRoutes = require('./routes/games');
 
 // express app
 const app = express();
 
+// configure dotenv
+dotenv.config();
+
 // connect to mongoDB
-const dbURI = 'mongodb+srv://aryanlilian:qaqsqdRFRGRH10bl@nodejs.wcaui.mongodb.net/GamesListDB?retryWrites=true&w=majority'
-mongoose.connect(dbURI, {
+mongoose.connect(process.env.DB_URI_CONNECTION, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false

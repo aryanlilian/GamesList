@@ -7,7 +7,7 @@ const getGamesList = (req, res) => {
                 title: 'Games List',
                 games: result
             }
-            res.render('games-list', context);
+            res.render('games/games-list', context);
         })
         .catch(err => console.log(err));
 }
@@ -16,7 +16,7 @@ const getAddGame = (req, res) => {
     const context = {
         title: 'Add Game'
     }
-    res.render('add-game', context);
+    res.render('games/add-game', context);
 }
 
 const postAddGame = (req, res) => {
@@ -34,7 +34,7 @@ const getGameDetails = (req, res) => {
                 title: 'Game Details',
                 game: result
             }
-            res.render('game-details', context);
+            res.render('games/game-details', context);
         })
         .catch((err) => {
             const context = {
@@ -52,7 +52,7 @@ const getDeleteGame = (req, res) => {
                 title: 'Delete Game',
                 game: result
             }
-            res.render('delete-game', context);
+            res.render('games/delete-game', context);
         })
         .catch((err) => {
             const context = {
