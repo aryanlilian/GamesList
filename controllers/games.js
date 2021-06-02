@@ -36,7 +36,12 @@ const getGameDetails = (req, res) => {
             }
             res.render('game-details', context);
         })
-        .catch(err => console.log(err));
+        .catch((err) => {
+            const context = {
+                title: '404'
+            }
+            res.status(404).render('404', context);
+        });
 }
 
 const getDeleteGame = (req, res) => {
@@ -49,7 +54,12 @@ const getDeleteGame = (req, res) => {
             }
             res.render('delete-game', context);
         })
-        .catch(err => console.log(err));
+        .catch((err) => {
+            const context = {
+                title: '404'
+            }
+            res.status(404).render('404', context);
+        });
 }
 
 const postDeleteGame = (req, res) => {
