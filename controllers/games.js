@@ -26,8 +26,44 @@ const postAddGame = (req, res) => {
         .catch(err => console.log(err));
 }
 
+const getGameDetails = (req, res) => {
+    const id = req.params.id;
+    Game.findById(id)
+        .then((result) => {
+            const context = {
+                title: 'Game Details',
+                game: result
+            }
+            res.render('game-details', context);
+        })
+        .catch(err => console.log(err));
+}
+
+const getDeleteGame = (req, res) => {
+    const id = req.params.id;
+    Game.findById(id)
+        .then((result) => {
+            const context = {
+                title: 'Delete Game',
+                game: result
+            }
+            res.render('delete-game', context);
+        })
+        .catch(err => console.log(err));
+}
+
+const postDeleteGame = (req, res) => {
+    const id = req.params.id;
+    Game.findByIdAndRemove(id)
+        .then(result => res.redirect('/games/list'))
+        .catch(err => console.log(err));
+}
+
 module.exports = {
     getGamesList,
     getAddGame,
-    postAddGame
+    postAddGame,
+    getGameDetails,
+    getDeleteGame,
+    postDeleteGame
 }

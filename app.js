@@ -9,7 +9,11 @@ const app = express();
 
 // connect to mongoDB
 const dbURI = 'mongodb+srv://aryanlilian:qaqsqdRFRGRH10bl@nodejs.wcaui.mongodb.net/GamesListDB?retryWrites=true&w=majority'
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(dbURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+    })
     .then((result) => {
         console.log('Connected to the DB');
         app.listen(8000, () => console.log('Server is listening on port 8000...'))

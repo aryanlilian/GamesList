@@ -8,6 +8,7 @@
               <h1 class="mb-5">Games List</h1>
               <div class="d-grid gap-2">
                   <a class="btn btn-success" href="/games/new">Add game</a>
+                  <hr>
               </div>
               <table class="table">
                   <thead>
@@ -21,11 +22,15 @@
                       <% if (games.length > 0) { %>
                           <% games.forEach((game) => { %>
                               <tr>
-                                  <th><%= game.title %></th>
+                                  <th>
+                                      <a href="/games/details/<%= game._id %>">
+                                          <%= game.title %>
+                                      </a>
+                                  </th>
                                   <th><%= game.description %></th>
                                   <th><%= game.category %></th>
                               </tr>
-                          <% }); %>
+                          <% }) %>
                       <% } else { %>
                           <p class="text-center">For the moment there are no games!</p>
                       <% } %>

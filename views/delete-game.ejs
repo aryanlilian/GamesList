@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <body>
+      <%- include('./partials/navbar.ejs') %>
+      <div class="text-center mt-5">
+          <h3 class="mb-5">Delete a game!</h3>
+          <div class="container">
+              <form class="form-control" action="/games/delete/<%= game._id %>" method="POST">
+                  <div class="input-group mb-3">
+                    <p>Are you sure you want to delete "<%= game.title %>"</p>
+                  </div>
+                  <div class="d-grid gap-2">
+                      <a class="btn btn-warning" href="/games/details/<%= game._id %>">Cancel</a>
+                      <button class="btn btn-danger" type="submit">Delete game</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+      <%- include('./partials/footer.ejs') %>
+  </body>
+</html>
