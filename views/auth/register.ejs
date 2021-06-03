@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <%- include('../partials/head.ejs') %>
+  <body>
+      <%- include('../partials/navbar.ejs') %>
+      <div class="text-center mt-5">
+          <h3 class="mb-5">Register an User!</h3>
+          <div class="container">
+              <form class="form-control" action="/auth/register" method="POST">
+                  <% if (errorMessage) { %>
+                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                          <div>
+                            <%= errorMessage %>
+                          </div>
+                        </div>
+                  <% } %>
+                  <div class="input-group mb-3">
+                    <input type="text" name="username" class="form-control" placeholder="Username..." required>
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <input type="email" name="email" class="form-control" placeholder="Email..." required>
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <input type="text" name="fullName" class="form-control" placeholder="Full Name..." required>
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <input type="password" name="password1" class="form-control" placeholder="Password..." required>
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <input type="password" name="password2" class="form-control" placeholder="Repeat Password..." required>
+                  </div>
+
+                  <div class="d-grid gap-2">
+                      <button class="btn btn-success" type="submit">Register</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+      <%- include('../partials/footer.ejs') %>
+  </body>
+</html>

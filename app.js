@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const indexRoutes = require('./routes/index');
 const gamesRoutes = require('./routes/games');
+const authRoutes = require('./routes/auth');
 
 // express app
 const app = express();
@@ -15,7 +16,8 @@ dotenv.config();
 mongoose.connect(process.env.DB_URI_CONNECTION, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false
+    useFindAndModify: false,
+    useCreateIndex: true
     })
     .then((result) => {
         console.log('Connected to the DB');
@@ -31,6 +33,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use('/', indexRoutes);
 app.use('/games', gamesRoutes);
+app.use('/auth', authRoutes);
 app.use((req, res) => {
     const context = {
         title: '404'
