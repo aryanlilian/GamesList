@@ -4,7 +4,7 @@
   <body>
       <%- include('../partials/navbar.ejs') %>
       <div class="text-center mt-5">
-          <h3 class="mb-5">Register an User!</h3>
+          <h3 class="mb-5">Register!</h3>
           <div class="container">
               <form class="form-control" action="/auth/register" method="POST">
                   <% if (errorMessage) { %>
@@ -38,6 +38,7 @@
                   <div class="d-grid gap-2">
                       <button class="btn btn-success" type="submit">Register</button>
                   </div>
+                  <small>Already have an account? <a href="/auth/login">Login</a></small>
               </form>
           </div>
       </div>

@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
-const { registerValidation }  = require('../validations/user-validation');
+const jwt = require('jsonwebtoken');
+const { registerValidation, loginValidation }  = require('../validations/user-validation');
 
 const getUserRegister = (req, res) => {
     // The context obj for the template
@@ -61,11 +62,21 @@ const postUserRegister = async (req, res) => {
     }
     const user = new User(userObj);
     user.save()
-        .then(result => res.render('auth/register', context))
+        .then(result => res.render('auth/login', context))
         .catch(err => console.log(err));
+}
+
+const getUserLogin = (req, res) => {
+    // The context obj for the template
+    const context = {
+        title: 'Login',
+        error: req.query.error
+    }
+    res.render('auth/login', context);
 }
 
 module.exports = {
     getUserRegister,
-    postUserRegister
+    postUserRegister,
+    getUserLogin,
 }

@@ -13,11 +13,15 @@ const registerValidation = (data) => {
 }
 
 // User model login validation
-// const userLoginValidationSchema = {
-//     username: Joi.string().min(8).required(),
-//     password: Joi.string().min(8).required()
-// }
+const loginValidation = (data) => {
+    const userRegisterSchema = Joi.object({
+        username: Joi.string().min(8).required(),
+        password: Joi.string().min(8).required()
+    });
+    return userRegisterSchema.validate(data);
+}
 
 module.exports = {
-    registerValidation
+    registerValidation,
+    loginValidation
 }

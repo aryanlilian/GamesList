@@ -2,6 +2,8 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const session = require('express-session');
+const passport = require('passport');
 const indexRoutes = require('./routes/index');
 const gamesRoutes = require('./routes/games');
 const authRoutes = require('./routes/auth');
@@ -28,9 +30,20 @@ mongoose.connect(process.env.DB_URI_CONNECTION, {
 // register view engine
 app.set('view engine', 'ejs');
 
-// middlewares & routes
+// middlewares
 app.use(express.urlencoded({ extended: true }));
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true
+}));
 app.use(morgan('dev'));
+
+// passport.js
+app.use(passport.initialize());
+app.use(passport.session());
+
+// routes middlewares
 app.use('/', indexRoutes);
 app.use('/games', gamesRoutes);
 app.use('/auth', authRoutes);

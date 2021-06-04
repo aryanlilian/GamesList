@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <%- include('../partials/head.ejs') %>
+  <body>
+      <%- include('../partials/navbar.ejs') %>
+      <div class="text-center mt-5">
+          <h3 class="mb-5">Login!</h3>
+          <div class="container">
+              <form class="form-control" action="/auth/login" method="POST">
+                  <% if (error) { %>
+                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                          <div>
+                            Username or password is incorrect!
+                          </div>
+                        </div>
+                  <% } %>
+                  <div class="input-group mb-3">
+                    <input type="text" name="username" class="form-control" placeholder="Username..." required>
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <input type="password" name="password" class="form-control" placeholder="Password..." required>
+                  </div>
+
+                  <div class="d-grid gap-2">
+                      <button class="btn btn-primary" type="submit">Login</button>
+                  </div>
+                  <small>Dont have an account? <a href="/auth/register">Register</a></small>
+              </form>
+          </div>
+      </div>
+      <%- include('../partials/footer.ejs') %>
+  </body>
+</html>
