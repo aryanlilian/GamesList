@@ -7,7 +7,8 @@ const getUserRegister = (req, res) => {
     // The context obj for the template
     const context = {
         title: 'Register',
-        errorMessage: null
+        errorMessage: null,
+        isLoggedIn: req.isAuthenticated()
     }
     res.render('auth/register', context);
 }
@@ -16,7 +17,8 @@ const postUserRegister = async (req, res) => {
     // The context obj for the template
     const context = {
         title: 'Register',
-        errorMessage: null
+        errorMessage: null,
+        isLoggedIn: req.isAuthenticated()
     }
 
     // Register form validation
@@ -70,13 +72,20 @@ const getUserLogin = (req, res) => {
     // The context obj for the template
     const context = {
         title: 'Login',
-        error: req.query.error
+        error: req.query.error,
+        isLoggedIn: req.isAuthenticated()
     }
     res.render('auth/login', context);
+}
+
+const getUserLogout = (req, res) => {
+    req.logout();
+    res.redirect('/auth/login');
 }
 
 module.exports = {
     getUserRegister,
     postUserRegister,
     getUserLogin,
+    getUserLogout
 }

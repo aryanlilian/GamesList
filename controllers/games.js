@@ -5,7 +5,8 @@ const getGamesList = (req, res) => {
         .then((result) => {
             const context = {
                 title: 'Games List',
-                games: result
+                games: result,
+                isLoggedIn: req.isAuthenticated()
             }
             res.render('games/games-list', context);
         })
@@ -14,7 +15,8 @@ const getGamesList = (req, res) => {
 
 const getAddGame = (req, res) => {
     const context = {
-        title: 'Add Game'
+        title: 'Add Game',
+        isLoggedIn: req.isAuthenticated()
     }
     res.render('games/add-game', context);
 }
@@ -32,7 +34,8 @@ const getGameDetails = (req, res) => {
         .then((result) => {
             const context = {
                 title: 'Game Details',
-                game: result
+                game: result,
+                isLoggedIn: req.isAuthenticated()
             }
             res.render('games/game-details', context);
         })
@@ -50,7 +53,8 @@ const getDeleteGame = (req, res) => {
         .then((result) => {
             const context = {
                 title: 'Delete Game',
-                game: result
+                game: result,
+                isLoggedIn: req.isAuthenticated()
             }
             res.render('games/delete-game', context);
         })
