@@ -25,7 +25,7 @@ const postUserRegister = async (req, res) => {
     const { error } = registerValidation(req.body);
     if (error) {
         context.errorMessage = error.details[0].message;
-        res.status(400).render('auth/register', context);
+        return res.status(400).render('auth/register', context);
     }
 
     // Checking if the username already exists in the DB
@@ -33,7 +33,7 @@ const postUserRegister = async (req, res) => {
     const usernameExist = await User.findOne({username: username});
     if (usernameExist) {
         context.errorMessage = 'Username already exists!';
-        res.status(400).render('auth/register', context);
+        return res.status(400).render('auth/register', context);
     }
 
     // Checking if the email already exists in the DB
@@ -41,14 +41,14 @@ const postUserRegister = async (req, res) => {
     const emailExist = await User.findOne({email: email});
     if (emailExist) {
         context.errorMessage = 'Email already exists!';
-        res.status(400).render('auth/register', context);
+        return res.status(400).render('auth/register', context);
     }
 
     // Checking if passwords match
-    const [password1, password2] = [req.body.password1, req.body.password2];
+    const [password1, password2] = [req.body.password, req.body.password2];
     if (password1 !== password2) {
         context.errorMessage = 'Passwords didn\'t match!';
-        res.status(400).render('auth/register', context);
+        return res.status(400).render('auth/register', context);
     }
 
     // Hash password
@@ -64,7 +64,7 @@ const postUserRegister = async (req, res) => {
     }
     const user = new User(userObj);
     user.save()
-        .then(result => res.render('auth/login', context))
+        .then(result => res.redirect('/auth/login?error=false'))
         .catch(err => console.log(err));
 }
 

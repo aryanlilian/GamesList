@@ -14,10 +14,14 @@ const gameSchema = Schema({
     category: {
         type: String,
         required: true
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'user'
     }
 }, { timestamps: true });
 
 // Game model
-const Game = mongoose.model('Game', gameSchema);
+const Game = mongoose.model('game', gameSchema);
 
 module.exports = Game;

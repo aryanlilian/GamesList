@@ -49,7 +49,9 @@ app.use('/games', gamesRoutes);
 app.use('/auth', authRoutes);
 app.use((req, res) => {
     const context = {
-        title: '404'
+        title: '404',
+        content: '404! Page not found!',
+        isLoggedIn: req.isAuthenticated()
     }
-    res.status(404).render('404', context);
+    res.status(404).render('errors-pages', context);
 });

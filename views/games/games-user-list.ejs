@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <%- include('../partials/head.ejs') %>
+  <body>
+      <%- include('../partials/navbar.ejs') %>
+      <div class="text-center mt-5">
+          <div class="container">
+              <h1 class="mb-5">My Games List</h1>
+              <div class="d-grid gap-2">
+                  <a class="btn btn-success" href="/games/new">Add game</a>
+                  <hr>
+              </div>
+              <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Title</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Category</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <% if (games.length > 0) { %>
+                          <% games.forEach((game) => { %>
+                              <tr>
+                                  <th>
+                                      <a href="/games/details/<%= game._id %>">
+                                          <%= game.title %>
+                                      </a>
+                                  </th>
+                                  <th><%= game.description %></th>
+                                  <th><%= game.category %></th>
+                              </tr>
+                          <% }) %>
+                      <% } else { %>
+                          <p class="text-center">For the moment there are no games!</p>
+                      <% } %>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+      <%- include('../partials/footer.ejs') %>
+  </body>
+</html>

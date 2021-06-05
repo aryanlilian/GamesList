@@ -20,10 +20,14 @@ const userSchema = Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    games: [{
+        type: Schema.Types.ObjectId,
+        ref: 'game'
+    }]
 }, { timestamps: true });
 
 // User model
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('user', userSchema);
 
 module.exports = User;
