@@ -1,5 +1,6 @@
 const Game = require('../models/game');
 const User = require('../models/user');
+const gameCategories = require('../constants/games');
 
 
 const getGamesList = (req, res) => {
@@ -54,13 +55,13 @@ const getGameDetails = (req, res) => {
     Game.findById(id)
         .then((result) => {
             const [gameUserId, currentUserId] = [result.user, req.user._id];
-            let userCanDelete = false;
-            if (gameUserId.equals(currentUserId)) userCanDelete = true;
+            let userCanDeleteOrUpdate = false;
+            if (gameUserId.equals(currentUserId)) userCanDeleteOrUpdate = true;
             const context = {
                 title: 'Game Details',
                 game: result,
                 isLoggedIn: req.isAuthenticated(),
-                userCanDelete: userCanDelete
+                userCanDeleteOrUpdate: userCanDeleteOrUpdate
             }
             res.render('games/game-details', context);
         })
@@ -70,6 +71,31 @@ const getGameDetails = (req, res) => {
             }
             res.status(404).render('404', context);
         });
+}
+
+const getUpdateGame = (req, res) => {
+    const id = req.params.id;
+    Game.findById(id)
+        .then(result => {
+            const context = {
+                title: 'Update',
+                game: result,
+                gameCategories: gameCategories,
+                isLoggedIn: req.isAuthenticated()
+            }
+            res.render('games/update-game', context);
+        })
+        .catch(err => console.log(err));
+}
+
+const postUpdateGame = (req, res) => {
+    const id = req.params.id;
+    Game.findByIdAndUpdate(id, {
+        title: req.body.title,
+        description: req.body.description,
+        category: req.body.category
+    }).then(result => res.redirect('/games/user/list'))
+    .catch(err => console.log(err));
 }
 
 const getDeleteGame = (req, res) => {
@@ -104,6 +130,8 @@ module.exports = {
     getAddGame,
     postAddGame,
     getGameDetails,
+    getUpdateGame,
+    postUpdateGame,
     getDeleteGame,
     postDeleteGame
 }
