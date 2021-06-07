@@ -15,6 +15,14 @@ const gameSchema = Schema({
         type: String,
         required: true
     },
+    thumbnailFileName: {
+        type: String,
+        required: true
+    },
+    imageFileName: {
+        type: String,
+        required: true
+    },
     user: {
         type: Schema.Types.ObjectId,
         ref: 'user'

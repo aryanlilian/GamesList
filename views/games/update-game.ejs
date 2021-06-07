@@ -6,7 +6,7 @@
       <div class="text-center mt-5">
           <h3 class="mb-5">Update the Game!</h3>
           <div class="container">
-              <form class="form-control" action="/games/update/<%= game._id %>" method="POST">
+              <form class="form-control" action="/games/update/<%= game._id %>" method="POST" enctype="multipart/form-data">
                   <div class="input-group mb-3">
                     <input type="text" name="title" class="form-control" value="<%= game.title %>">
                   </div>
@@ -26,6 +26,17 @@
                         <% }) %>
                     </select>
                   </div>
+
+                  <div class="input-group mb-3">
+                      <input type="file" class="form-control" id="imageFile" name="thumbnail">
+                      <label class="input-group-text" for="imageFile">Upload thumbnail (jpeg/jpg file)</label>
+                  </div>
+
+                  <div class="input-group mb-3">
+                      <input type="file" class="form-control" id="gameFile" name="image">
+                      <label class="input-group-text" for="imageFile">Upload game image (jpeg/jpg file)</label>
+                  </div>
+
                   <div class="d-grid gap-2">
                       <button class="btn btn-success" type="submit">Update game</button>
                   </div>

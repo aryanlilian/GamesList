@@ -39,7 +39,23 @@ const getAddGame = (req, res) => {
 
 const postAddGame = (req, res) => {
     const user = req.user;
-    const game = new Game(req.body);
+    const data = req.body;
+    const [thumbnailFile, imageFile] = [req.files.thumbnail, req.files.image];
+
+    thumbnailFile.mv('public/games_thumbnails/' + thumbnailFile.name)
+        .then(result => console.log('Thumbnail uploaded successfully'))
+        .catch(err => console.log(err));
+    imageFile.mv('public/games_images/' + imageFile.name)
+        .then(result => console.log('Image uploaded successfully'))
+        .catch(err => console.log(err));
+
+    const game = new Game({
+        title: data.title,
+        description: data.description,
+        category: data.category,
+        thumbnailFileName: thumbnailFile.name,
+        imageFileName: imageFile.name
+    });
     game.user = user;
     game.save()
         .then(result => console.log(result))
@@ -88,12 +104,39 @@ const getUpdateGame = (req, res) => {
         .catch(err => console.log(err));
 }
 
-const postUpdateGame = (req, res) => {
+const postUpdateGame = async (req, res) => {
     const id = req.params.id;
+    const data = req.body;
+    let [thumbnailFile, imageFile] = [req.files.thumbnail, req.files.image];
+    const game = await Game.findById(id)
+        .then(result => {
+            if (thumbnailFile) {
+                thumbnailFile.mv('public/games_thumbnails/' + thumbnailFile.name)
+                    .then(result => console.log('Thumbnail uploaded successfully!'))
+                    .catch(err => console.log(err));
+            } else {
+                thumbnailFile = {
+                    name: result.thumbnailFileName
+                };
+            }
+            if (imageFile) {
+                imageFile.mv('public/games_images/' + imageFile.name)
+                    .then(result => console.log('Image uploaded successfully!'))
+                    .catch(err => console.log(err));
+            } else {
+                imageFile = {
+                    name: result.imageFileName
+                };
+            }
+        })
+        .catch(err => console.log(err));
+
     Game.findByIdAndUpdate(id, {
-        title: req.body.title,
-        description: req.body.description,
-        category: req.body.category
+        title: data.title,
+        description: data.description,
+        category: data.category,
+        thumbnailFileName: thumbnailFile.name,
+        imageFileName: imageFile.name
     }).then(result => res.redirect('/games/user/list'))
     .catch(err => console.log(err));
 }

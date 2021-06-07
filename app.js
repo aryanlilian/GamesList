@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const session = require('express-session');
 const passport = require('passport');
+const fileUpload = require('express-fileupload');
 const indexRoutes = require('./routes/index');
 const gamesRoutes = require('./routes/games');
 const authRoutes = require('./routes/auth');
@@ -31,6 +32,7 @@ mongoose.connect(process.env.DB_URI_CONNECTION, {
 app.set('view engine', 'ejs');
 
 // middlewares
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -38,6 +40,7 @@ app.use(session({
     saveUninitialized: true
 }));
 app.use(morgan('dev'));
+app.use(fileUpload());
 
 // passport.js
 app.use(passport.initialize());

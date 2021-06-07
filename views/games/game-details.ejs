@@ -6,29 +6,14 @@
       <div class="text-center mt-5">
           <div class="container">
               <h1 class="mb-5">Game Details</h1>
-              <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Title</th>
-                      <th scope="col">Description</th>
-                      <th scope="col">Category</th>
-                      <% if (userCanDeleteOrUpdate) { %>
-                          <th scope="col">Update/Delete</th>
-                      <% } %>
-                    </tr>
-                  </thead>
-                  <tbody>
-                      <th><%= game.title %></th>
-                      <th><%= game.description %></th>
-                      <th><%= game.category %></th>
-                      <% if (userCanDeleteOrUpdate) { %>
-                          <th>
-                              <a href="/games/update/<%= game._id %>" class="btn btn-success">Update</a>
-                              <a href="/games/delete/<%= game._id %>" class="btn btn-danger">Delete</a>
-                          </th>
-                      <% } %>
-                  </tbody>
-              </table>
+              <div class="card mb-3">
+                  <img src="/games_images/<%= game.imageFileName %>" class="card-img-top" alt="Game Image">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= game.title %></h5>
+                    <p class="card-text"><%= game.description %></p>
+                    <!-- <p class="card-text"><small class="text-muted"></small></p> -->
+                  </div>
+              </div>
           </div>
       </div>
       <%- include('../partials/footer.ejs') %>
